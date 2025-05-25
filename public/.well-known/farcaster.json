@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjg1MDI3NSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDI2RGZDYTU4QzAwRmQ2OTY5MjBBNjM4M2MzRkEwYUE3YTg3Qjk5NGUifQ",
+    "payload": "eyJkb21haW4iOiJmYXJxdWl6YXBwLnZlcmNlbC5hcHAifQ",
+    "signature": "MHg4MjMyY2Y2NDNjYTEwMmFlYWJkNzNmNWUxYjA1NWJiZWFjMzdhYjM4ZTcyZjRhMzMzZTk3YzMzODFmNGQ2ODI3NTZiMGI3ZDY4MjFlMmQzMjAyMDk4M2UxNTNhYmFkM2NjNWIzYmFhMTZlMjZlNTdiNDBiMjNiOGU2NDIwODUyYjFi"
+  },
+  "frame": {
+    "version": "1",
+    "name": "FarQuiz",
+    "iconUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_icon-IXTBuZNFH0DudhmcvziRZArAtuvCWn.png?reUe",
+    "homeUrl": "https://farquizapp.vercel.app",
+    "imageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_share_image-gNEfyJSjiSBnqxdOtSD4uWjQbT4mhy.png?GdgB",
+    "buttonTitle": "Check this out",
+    "splashImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_splash-h61l64V89HzQsrn3v0Ey1RJGCVtPvq.png?Ik5m",
+    "splashBackgroundColor": "#8B5CF6",
+    "webhookUrl": "https://farquizapp.vercel.app/api/webhook"
+  }
+}
