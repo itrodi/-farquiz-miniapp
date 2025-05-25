@@ -7,8 +7,7 @@ import { Header } from "@/components/header"
 import { MobileNav } from "@/components/mobile-nav"
 import { AuthProvider } from "@/contexts/auth-kit-context"
 import { Toaster } from "@/components/ui/toaster"
-import { useEffect } from "react"
-import { sdk } from "@farcaster/frame-sdk"
+import { FarcasterInit } from "@/components/farcaster-init"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -25,21 +24,13 @@ export const metadata: Metadata = {
   }
 }
 
-function InitFarcaster() {
-  useEffect(() => {
-    // Hide splash screen when app is ready
-    sdk.actions.ready();
-  }, []);
-  return null;
-}
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${inter.className} bg-slate-900 text-white min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <AuthProvider>
-            <InitFarcaster />
+            <FarcasterInit />
             <div className="flex flex-col min-h-screen">
               <Header />
               <main className="flex-1 pb-16 md:pb-0">{children}</main>
