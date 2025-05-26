@@ -12,14 +12,23 @@ import { FarcasterInit } from "./components/farcaster-init"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "BrainCast - Interactive Quizzes",
-  description: "Test your knowledge and learn with interactive quizzes on BrainCast.",
+  title: "FarQuiz - Interactive Quizzes",
+  description: "Test your knowledge and learn with interactive quizzes on FarQuiz.",
   generator: 'v0.dev',
   other: {
     'fc:frame': JSON.stringify({
-      image: 'https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_icon-IXTBuZNFH0DudhmcvziRZArAtuvCWn.png?reUe',
-      buttons: [{ label: 'Start Quiz' }],
-      post: { title: 'FarQuiz' }
+      version: 'next',
+      imageUrl: 'https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_share_image-gNEfyJSjiSBnqxdOtSD4uWjQbT4mhy.png?GdgB',
+      button: {
+        title: 'Start Quiz',
+        action: {
+          type: 'launch_frame',
+          name: 'FarQuiz',
+          url: 'https://farquizapp.vercel.app',
+          splashImageUrl: 'https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_splash-h61l64V89HzQsrn3v0Ey1RJGCVtPvq.png?Ik5m',
+          splashBackgroundColor: '#8B5CF6'
+        }
+      }
     })
   }
 }
