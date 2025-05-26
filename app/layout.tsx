@@ -7,7 +7,7 @@ import { Header } from "@/components/header"
 import { MobileNav } from "@/components/mobile-nav"
 import { AuthProvider } from "@/contexts/auth-kit-context"
 import { Toaster } from "@/components/ui/toaster"
-import { FarcasterInit } from "@/components/farcaster-init"
+import { FarcasterInit } from "./components/farcaster-init"
 
 const inter = Inter({ subsets: ["latin"] })
 
