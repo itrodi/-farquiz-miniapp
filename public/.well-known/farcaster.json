@@ -16,5 +16,28 @@
     "splashImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_splash-h61l64V89HzQsrn3v0Ey1RJGCVtPvq.png?Ik5m",
     "splashBackgroundColor": "#8B5CF6",
     "webhookUrl": "https://farquiz-miniapp-y88k.vercel.app/api/webhook"
+
+    "subtitle": "Interactive Quiz Platform",
+    "description": "Test your knowledge with interactive quizzes and compete with friends on Farcaster.",
+    "screenshotUrls": [
+      "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/WhatsApp%20Image%202025-05-26%20at%2016.08.03-vadPxocwANKP0nOgaqUMu6tt2SI2Zw.jpg?ZO0x",
+      "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/WhatsApp%20Image%202025-05-26%20at%2019.55.25-UgUXhLZ8FFB5k2hg7FqNRZOOAU7TKJ.jpg?aBC4"
+    ],
+    "primaryCategory": "game",
+    "tags": [
+      "quiz",
+      "trivia", 
+      "education",
+      "competition",
+      "social",
+      "games",
+      "learning",
+      "knowledge"
+    ],
+    "heroImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_share_image-gNEfyJSjiSBnqxdOtSD4uWjQbT4mhy.png?GdgB",
+    "tagline": "The Ultimate Quiz Experience on Farcaster",
+    "ogTitle": "FarQuiz - Interactive Quizzes on Farcaster",
+    "ogDescription": "Test your knowledge and compete with friends using interactive quizzes. ",
+    "ogImageUrl": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_share_image-gNEfyJSjiSBnqxdOtSD4uWjQbT4mhy.png?GdgB"
   }
 }
