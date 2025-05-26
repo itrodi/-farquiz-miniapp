@@ -1,10 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import { createContext, useContext, useEffect, useState, useRef, useCallback } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter, usePathname } from "next/navigation"
+import { farcasterAuth } from "@/lib/farcaster-auth"
 
 type Profile = {
   id: string
@@ -14,6 +14,7 @@ type Profile = {
   totalScore: number
   quizzesTaken: number
   quizzesCreated: number
+  farcasterFid?: number | null
 }
 
 type AuthContextType = {
@@ -22,6 +23,7 @@ type AuthContextType = {
   profile: Profile | null
   signOut: () => Promise<void>
   refreshProfile: () => Promise<void>
+  signInWithFarcaster: () => Promise<boolean>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -37,24 +39,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const supabase = createClient()
 
-  // Use a ref to track if we're already fetching the profile
+  // Use refs to prevent duplicate operations
   const isFetchingProfile = useRef(false)
-  // Use a ref to store the last fetch time
   const lastFetchTime = useRef(0)
-  // Cache the profile data
   const profileCache = useRef<{ [key: string]: { data: Profile; timestamp: number } } | null>(null)
-  // Track initialization
   const isInitialized = useRef(false)
+  const farcasterAuthAttempted = useRef(false)
 
   const fetchProfile = useCallback(
     async (userId: string, retryCount = 0) => {
-      // If we're already fetching or if it's been less than 5 seconds since the last fetch, skip
+      // Prevent duplicate fetches
       const now = Date.now()
       if (isFetchingProfile.current || (now - lastFetchTime.current < 5000 && profileCache.current?.[userId])) {
         return profileCache.current?.[userId]?.data || null
       }
 
-      // Check if we have a cached profile that's less than 30 seconds old
+      // Check cache
       if (profileCache.current?.[userId] && now - profileCache.current[userId].timestamp < 30000) {
         return profileCache.current[userId].data
       }
@@ -73,7 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
 
         if (error) {
-          // Check if it's a rate limiting error
+          // Handle rate limiting with retry
           if (error.message?.includes("Too Many Requests") && retryCount < 3) {
             console.warn(`Rate limited, retrying in ${Math.pow(2, retryCount + 1)} seconds...`)
             isFetchingProfile.current = false
@@ -93,6 +93,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             totalScore: data.total_score,
             quizzesTaken: data.quizzes_taken,
             quizzesCreated: data.quizzes_created,
+            farcasterFid: data.farcaster_fid
           }
 
           // Cache the profile data
@@ -131,6 +132,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [fetchProfile, supabase.auth])
 
+  const signInWithFarcaster = useCallback(async () => {
+    try {
+      const result = await farcasterAuth.signInWithFarcaster()
+      if (result.success && result.user) {
+        setIsAuthenticated(true)
+        await fetchProfile(result.user.id)
+        return true
+      }
+      return false
+    } catch (error) {
+      console.error("Error in signInWithFarcaster:", error)
+      return false
+    }
+  }, [fetchProfile])
+
   // Initialize auth state
   useEffect(() => {
     const initAuth = async () => {
@@ -147,6 +163,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         if (session?.user) {
           await fetchProfile(session.user.id)
+        } else {
+          // Try Farcaster auth if we're in a Mini App and haven't tried yet
+          if (!farcasterAuthAttempted.current) {
+            farcasterAuthAttempted.current = true
+            const inMiniApp = await farcasterAuth.isInMiniApp()
+            
+            if (inMiniApp) {
+              console.log("No session found, attempting Farcaster auth...")
+              const success = await signInWithFarcaster()
+              if (success) {
+                console.log("Farcaster auto-auth successful")
+              }
+            }
+          }
         }
       } catch (error) {
         console.error("Error initializing auth:", error)
@@ -156,7 +186,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     initAuth()
-  }, [fetchProfile, supabase.auth])
+  }, [fetchProfile, signInWithFarcaster, supabase.auth])
 
   // Listen for auth changes
   useEffect(() => {
@@ -224,6 +254,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     profile,
     signOut,
     refreshProfile,
+    signInWithFarcaster,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
