@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         action: {
           type: 'launch_frame',
           name: 'FarQuiz',
-          url: 'https://farquizapp.vercel.app',
+          url: 'https://farquiz-miniapp-y88k.vercel.app/',
           splashImageUrl: 'https://lqy3lriiybxcejon.public.blob.vercel-storage.com/RBv8coHVCER8/farquiz_splash-h61l64V89HzQsrn3v0Ey1RJGCVtPvq.png?Ik5m',
           splashBackgroundColor: '#8B5CF6'
         }
