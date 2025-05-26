@@ -2,8 +2,13 @@ import { ImageResponse } from 'next/og'
 import { createClient } from '@/lib/supabase/server'
 
 export const runtime = 'edge'
+export const contentType = 'image/png'
+export const size = {
+  width: 1200,
+  height: 630,
+}
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export default async function Image({ params }: { params: { id: string } }) {
   const supabase = createClient()
 
   // Get the quiz with category and questions
