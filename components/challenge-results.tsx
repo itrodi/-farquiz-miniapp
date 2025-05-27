@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Loader2, Trophy, Clock, Share2, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 
 interface ChallengeResultsProps {
   score: number

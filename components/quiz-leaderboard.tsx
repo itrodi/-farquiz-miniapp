@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { createClient } from "@/lib/supabase/client"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Clock, Trophy, Medal } from "lucide-react"

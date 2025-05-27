@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 import { toast } from "@/components/ui/use-toast"
 import Link from "next/link"
 

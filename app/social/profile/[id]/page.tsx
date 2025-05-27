@@ -22,7 +22,8 @@ import {
 } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2 } from "lucide-react"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
+
 import { toast } from "@/components/ui/use-toast"
 
 export default function UserProfilePage({ params }: { params: { id: string } }) {

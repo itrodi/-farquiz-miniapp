@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button"
 import { UserAchievements } from "@/components/user-achievements"
 import { UserChallenges } from "@/components/user-challenges"
 import { Loader2, PencilIcon } from "lucide-react"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
+
 import Link from "next/link"
 
 export default function ProfilePage() {

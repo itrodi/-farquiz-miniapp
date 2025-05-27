@@ -7,7 +7,8 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Clock, Users, BarChart2, Award, Calendar, Tag, Trophy, Share2, ListOrdered } from "lucide-react"
 import Image from "next/image"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
+
 import { QuizLeaderboard } from "@/components/quiz-leaderboard"
 import { useToast } from "@/hooks/use-toast"
 

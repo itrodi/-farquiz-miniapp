@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react"
 import { sdk } from "@farcaster/frame-sdk"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 
 export function FarcasterInit() {
   const [isMiniApp, setIsMiniApp] = useState(false)
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, profile } = useAuth()
 
   useEffect(() => {
     const initializeFarcaster = async () => {
@@ -48,7 +48,7 @@ export function FarcasterInit() {
             console.log(`🎮 Quiz ID detected: ${quizId}, source: ${utm_source}`)
             
             // Only redirect after authentication or a short delay for sign-in
-            if (isAuthenticated) {
+            if (isAuthenticated && profile) {
               console.log('✅ User authenticated, redirecting to quiz')
               setTimeout(() => {
                 window.location.href = `/quiz/${quizId}`
@@ -75,6 +75,8 @@ export function FarcasterInit() {
           sdk.on('notificationsDisabled', () => {
             console.log('🔕 Notifications disabled')
           })
+        } else {
+          console.log('🌐 FarQuiz running in regular web browser')
         }
         
         // Always call ready to dismiss splash screen
@@ -104,11 +106,11 @@ export function FarcasterInit() {
         }
       }
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, profile])
 
   // Handle post-authentication quiz redirect
   useEffect(() => {
-    if (isMiniApp && isAuthenticated) {
+    if (isMiniApp && isAuthenticated && profile) {
       const urlParams = new URLSearchParams(window.location.search)
       const quizId = urlParams.get('quiz')
       
@@ -120,7 +122,7 @@ export function FarcasterInit() {
         }, 1000)
       }
     }
-  }, [isMiniApp, isAuthenticated])
+  }, [isMiniApp, isAuthenticated, profile])
   
   return null
 }

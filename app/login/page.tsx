@@ -1,22 +1,13 @@
-import { SignInForm } from "@/components/auth/sign-in-form"
-import { createClient } from "@/lib/supabase/server"
-import { redirect } from "next/navigation"
+// app/login/page.tsx
+import { AuthStatus } from "@/components/auth-status"
 
-export default async function LoginPage() {
-  const supabase = createClient()
-
-  // Check if user is already logged in
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  if (session) {
-    redirect("/")
-  }
-
+export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <SignInForm />
+      <div className="w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center mb-6">Welcome to FarQuiz</h1>
+        <AuthStatus />
+      </div>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/client"
 import { Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 import Link from "next/link"
 
 export function NotificationsDropdown() {

@@ -1,6 +1,6 @@
 "use client"
 
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 import { LogOut, User } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"

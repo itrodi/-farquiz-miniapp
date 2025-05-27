@@ -15,7 +15,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Label } from "@/components/ui/label"
 import { ArrowLeft, Plus, Trash2 } from "lucide-react"
 import Link from "next/link"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 
 // Define proper types for our quiz questions
 interface BaseQuestion {

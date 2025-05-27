@@ -14,7 +14,8 @@ import { ChallengeModal } from "@/components/challenge-modal"
 import { FriendRequests } from "@/components/friend-requests"
 import { FriendsList } from "@/components/friends-list"
 import { toast } from "@/components/ui/use-toast"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
+
 
 export default function SocialPage() {
   const [users, setUsers] = useState<any[]>([])

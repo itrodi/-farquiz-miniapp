@@ -1,3 +1,4 @@
+// app/api/scores/route.ts
 import { createClient } from "@/lib/supabase/server"
 import { NextResponse } from "next/server"
 
@@ -5,17 +6,24 @@ export async function POST(request: Request) {
   const supabase = createClient()
 
   try {
-    const { quiz_id, score, max_score, time_taken } = await request.json()
+    const { quiz_id, score, max_score, time_taken, user_fid } = await request.json()
 
-    // Get the user's ID from the session
-    const {
-      data: { session },
-    } = await supabase.auth.getSession()
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    if (!user_fid) {
+      return NextResponse.json({ error: "User FID is required" }, { status: 400 })
     }
 
-    const user_id = session.user.id
+    // Get user profile by FID
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('farcaster_fid', user_fid)
+      .single()
+
+    if (profileError || !profile) {
+      return NextResponse.json({ error: "User profile not found" }, { status: 404 })
+    }
+
+    const user_id = profile.id
     const percentage = Math.round((score / max_score) * 100)
 
     // Insert the score
@@ -40,8 +48,9 @@ export async function POST(request: Request) {
     await supabase
       .from("profiles")
       .update({
-        total_score: supabase.rpc("increment", { x: score }),
-        quizzes_taken: supabase.rpc("increment", { x: 1 }),
+        total_score: profile.total_score + score,
+        quizzes_taken: profile.quizzes_taken + 1,
+        updated_at: new Date().toISOString()
       })
       .eq("id", user_id)
 

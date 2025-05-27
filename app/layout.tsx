@@ -6,7 +6,7 @@ import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/header"
 import { MobileNav } from "@/components/mobile-nav"
-import { AuthProvider } from "@/contexts/auth-kit-context"
+import { SimplifiedAuthProvider } from "@/contexts/simplified-auth-context"
 import { Toaster } from "@/components/ui/toaster"
 import { FarcasterInit } from "./components/farcaster-init"
 
@@ -64,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${inter.className} bg-slate-900 text-white min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <AuthProvider>
+          <SimplifiedAuthProvider>
             <FarcasterInit />
             <div className="flex flex-col min-h-screen">
               <Header />
@@ -72,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <MobileNav />
             </div>
             <Toaster />
-          </AuthProvider>
+          </SimplifiedAuthProvider>
         </ThemeProvider>
       </body>
     </html>

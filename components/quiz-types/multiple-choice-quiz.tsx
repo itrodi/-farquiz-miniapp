@@ -8,7 +8,7 @@ import { QuizResults } from "@/components/quiz-results"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import { shuffleArray } from "@/lib/array-utils"
-import { useAuth } from "@/contexts/auth-kit-context"
+import { useAuth } from "@/contexts/simplified-auth-context"
 import type { Tables } from "@/lib/supabase/database.types"
 
 type QuizProps = {
